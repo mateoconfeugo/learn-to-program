@@ -30,10 +30,10 @@ public class Main {
             x++;
         }
 
-        Dog dog = new Dog();
-        for(x = 0; x < 10; x++) {
-            System.out.println("One small step for man");
-            dog.bark(3);
-        }
+        Pet<Dog> spot = new Pet<Dog>();
+        spot.talk(3);
+
+        Pet<Cat> whiskers = new Pet<Cat>();
+        whiskers.talk(4);
     }
 }

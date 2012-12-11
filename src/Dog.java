@@ -1,3 +1,11 @@
+import java.util.ArrayList;
+import java.util.List;
+
+enum Day {
+    SUNDAY, MONDAY, TUESDAY, WEDNESDAY,
+    THURSDAY, FRIDAY, SATURDAY
+}
+
 @ClassPreamble (
         author = "Matthew Burns",
         date = "3/17/2002",
@@ -36,10 +44,15 @@ public class Dog {
         name = n;
     }
 
-    public void bark(int number_of_barks) {
+    public void speak(int number_of_barks) {
         while (number_of_barks > 0) {
             System.out.println("Ruff, Ruff");
             number_of_barks--;
+            Day today = Day.MONDAY;
+            System.out.println("Today is " + today);
         }
     }
+
 }
+
+
