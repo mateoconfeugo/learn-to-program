@@ -5,13 +5,11 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :min-lein-version "2.0.0"
   :dependencies [[compojure "1.1.5"] ; Web routing https://github.com/weavejester/compojure
-                 [com.taoensso/timbre "2.2.0"] ; Logging https://github.com/ptaoussanis/timbre
                  [enlive "1.1.1"] ; DOM manipulating                                   
-                 [liberator "0.9.0"] ; WebMachine(REST state machine) port to clojure
                  [me.raynes/fs "1.4.0"]  ; File manipulation tools                                 
                  [org.clojure/clojure "1.5.1"]  ; Lisp on the JVM
                  [ring "1.2.0"]
-                 [ring.middleware.logger "0.4.0"]]
+                 [ring/ring-jetty-adapter "1.2.0"]]
   :plugins [[lein-ring "0.8.6"]
             [lein-localrepo "0.4.1"]            
             [s3-wagon-private "1.1.2"]            
