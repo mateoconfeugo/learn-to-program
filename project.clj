@@ -7,7 +7,6 @@
   :dependencies [[compojure "1.1.5"] ; Web routing https://github.com/weavejester/compojure
                  [com.taoensso/timbre "2.2.0"] ; Logging https://github.com/ptaoussanis/timbre
                  [enlive "1.1.1"] ; DOM manipulating                                   
-                 [flourish-common "0.1.0"]  ; Common functionality of the gusto system                 
                  [liberator "0.9.0"] ; WebMachine(REST state machine) port to clojure
                  [me.raynes/fs "1.4.0"]  ; File manipulation tools                                 
                  [org.clojure/clojure "1.5.1"]  ; Lisp on the JVM
