@@ -15,7 +15,6 @@
                  [ring/ring-jetty-adapter "1.2.0"]                 
                  [ring.middleware.logger "0.4.0"]] ; web server logging middleware
   :plugins [[lein-ring "0.8.6"]
-            [lein-localrepo "0.4.1"]            
             [s3-wagon-private "1.1.2"]            
             [lein-expectations "0.0.7"]
             [lein-autoexpect "0.2.5"]]
