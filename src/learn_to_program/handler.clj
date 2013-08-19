@@ -4,7 +4,7 @@
             [compojure.core :as core :refer [routes]]
             [compojure.route :as route :refer [resources files not-found]]
             [ring.adapter.jetty :as ring :refer [run-jetty]]
-            [learn-to-program.controllers.site  :refer [site-routes]]))
+            [learn-to-program.controllers.site  :refer [site-routes]])
   (:gen-class))
 
 (def app-routes  (core/routes
