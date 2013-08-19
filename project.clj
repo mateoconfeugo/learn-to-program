@@ -7,12 +7,13 @@
   :dependencies [[compojure "1.1.5"] ; Web routing https://github.com/weavejester/compojure
                  [com.taoensso/timbre "2.2.0"] ; Logging https://github.com/ptaoussanis/timbre
                  [enlive "1.1.1"] ; DOM manipulating                                   
-                 [flourish-common "0.1.0"]  ; Common functionality of the gusto system                 
+                 [flourish-common "0.1.0"]  ; Common functionality of the gusto system
+                 [cms "0.1.0"]  ; Content Management System
                  [liberator "0.9.0"] ; WebMachine(REST state machine) port to clojure
                  [me.raynes/fs "1.4.0"]  ; File manipulation tools                                 
                  [org.clojure/clojure "1.5.1"]  ; Lisp on the JVM
-                 [ring "1.2.0"]
-                 [ring.middleware.logger "0.4.0"]]
+                 [ring "1.2.0"] ; Webserver framework
+                 [ring.middleware.logger "0.4.0"]] ; web server logging middleware
   :plugins [[lein-ring "0.8.6"]
             [lein-localrepo "0.4.1"]            
             [s3-wagon-private "1.1.2"]            

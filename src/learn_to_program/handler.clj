@@ -1,11 +1,14 @@
 (ns learn-to-program.handler
+  "Top level request handler for the web application"
   (:require [compojure.handler :as handler]
             [compojure.core :as core :refer [routes]]
             [compojure.route :as route :refer [resources files not-found]]
-            [ring.adapter.jetty :as ring :refer [run-jetty]])
+            [ring.adapter.jetty :as ring :refer [run-jetty]]
+            [learn-to-program.controllers.site  :refer [site-routes]])
   (:gen-class))
 
 (def app-routes  (core/routes
+                  site-routes
                   (route/resources "/")
                   (route/files "/" {:root "public"})
                   (route/not-found "Not Found")))
