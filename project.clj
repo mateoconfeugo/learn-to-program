@@ -12,7 +12,7 @@
                  [me.raynes/fs "1.4.0"]  ; File manipulation tools                                 
                  [org.clojure/clojure "1.5.1"]  ; Lisp on the JVM
                  [ring "1.2.0"] ; Webserver framework
-                 [ring/ring-jetty-adapter "1.2.0"]]                 
+                 [ring/ring-jetty-adapter "1.2.0"]                 
                  [ring.middleware.logger "0.4.0"]] ; web server logging middleware
   :plugins [[lein-ring "0.8.6"]
             [lein-localrepo "0.4.1"]            
