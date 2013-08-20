@@ -8,8 +8,8 @@
             [learn-to-program.views.host-dom :as host :refer [render]]
             [learn-to-program.views.static-page :refer [render-static-page]]))
 
-(def root-dir (str (System/getProperty "user.dir") "/website"))
-(def cfg-dir (str (System/getProperty "user.dir") "/website/config"))
+(def root-dir (str (System/getProperty "user.dir") "/resources/websites"))
+(def cfg-dir (str (System/getProperty "user.dir") "/resources/websites/config"))
 (def static-html-dir (str (System/getProperty "user.dir") "/resources/public/html/articles/"))
 (def cfg (read-config (new-config {:cfg-file-path (str cfg-dir "/site-config.json")})))
 (def token-type (-> cfg :website :site-cfg-dir-path))
