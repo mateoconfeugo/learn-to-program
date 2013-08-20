@@ -4,6 +4,7 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :min-lein-version "2.0.0"
+  :uberjar-name "learn-to-program-0.1.0-standalone.jar"
   :dependencies [[compojure "1.1.5"] ; Web routing https://github.com/weavejester/compojure
                  [enlive "1.1.1"] ; DOM manipulating                                   
                  [flourish-common "0.1.0"]  ; Common functionality of the gusto system
