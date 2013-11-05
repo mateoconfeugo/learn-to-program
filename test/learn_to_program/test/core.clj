@@ -1,6 +1,6 @@
-(ns learn-to-program.test.handler
+(ns learning-to-program.test.core
   (:require [clojure.test :refer :all]
-            [learn-to-program.handler :refer :all]))
+            [learn-to-program.core :refer :all]))
 
 (deftest a-test
   (testing "FIXME, I fail."
