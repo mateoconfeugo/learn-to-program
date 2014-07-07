@@ -1,0 +1,15 @@
+{
+    "drop_down_menu":[
+                      {"drop_down_menu_name":"Landing Sites",
+                              "menu_item":[
+                                           {"menu_item_url":"/mgmt/landing-site/summary","menu_item_text":"List"},
+                                           {"menu_item_url":"/mgmt/site-builder/editor","menu_item_text":"Site Builder"},
+                                           {"menu_item_url":"/site-builder/","menu_item_text":"Site Publisher"}]},
+                      {"drop_down_menu_name":"Content Management",
+                              "menu_item":[
+                                           {"menu_item_url":"/cms/","menu_item_text":"New Document"},
+                                           {"menu_item_url":"/cms/","menu_item_text":"Story Builder"},
+                                           {"menu_item_url":"/cms/", "menu_item_text":"Search Archive"}]}
+
+                      ]
+}
