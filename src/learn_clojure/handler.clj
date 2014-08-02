@@ -1,75 +1,39 @@
 (ns learn-clojure.handler
-  (:require [cheshire.core :refer :all]
-            [compojure.handler :as handler]
-            [compojure.core :as core :refer [routes defroutes GET]]
-            [compojure.route :as c-route :refer [resources files not-found]]
-            [net.cgrand.enlive-html :refer [deftemplate clone-for content add-class set-attr do->
-                                            html-content first-child nth-of-type defsnippet]]
-            [ring.adapter.jetty :as ring :refer [run-jetty]]
-            [ring.util.response :refer [file-response response]]
-            [shoreleave.server-helpers :refer [safe-read]])
+  (:require [learn-clojure.config :refer [config]]
+            [compojure.handler :as handler :refer [site]]
+            [ring.middleware.gzip :refer [wrap-gzip]]
+            [ring.middleware.file-info :refer [wrap-file-info]]
+            [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
+            [ring.middleware.session.cookie :refer [cookie-store]]
+            [shoreleave.middleware.rpc :refer [wrap-rpc]]
+            [learn-clojure.routes :refer [all-routes]])
   (:gen-class))
 
-;; Configuration
-(defn read-config
-  "Read a config file and return it as Clojure Data.  Usually, this is a hashmap"
-  ([]
-     (read-config (str (System/getProperty "user.dir") "/resources/config.edn")))
-  ([config-loc]
-     (safe-read (slurp config-loc))))
+(defn init []  (println "The baseline app is starting"))
+(defn destroy []  (println "The baseline app has been shut down"))
 
-(def config (read-config))
+(defn wrap-add-anti-forgery-cookie
+  "Mimics code in Shoreleave-baseline's customized ring-anti-forgery middleware."
+  [handler & [opts]]
+  (fn [request]
+     (let [response (handler request)]
+       (if-let [token (-> request :session (get "__anti-forgery-token"))]
+         (assoc-in response [:cookies "__anti-forgery-token"] token)
+         response))))
 
-;; HTML View Pieces
-(defsnippet site-nav-header "templates/html/site-nav-header.html" [:nav.container-fluid]
-  [site-name]
-  [:a.brand] (content site-name))
+(defn get-handler
+  "wrap app with ring extensions"
+  [app]
+  (-> app
+      wrap-rpc
+      wrap-add-anti-forgery-cookie
+      wrap-anti-forgery
+      wrap-gzip
+      (handler/site {:session {:cookie-name (config :cookie-name)
+                               :store (cookie-store {:key (config :session-secret)})
+                               :cookie-attrs {:max-age (config :session-max-age-seconds)
+                                              :http-only true}}})
+      wrap-file-info))
 
-(defsnippet menu-item-model "templates/html/site-nav-header.html" [[:ul.dropdown-menu (nth-of-type 1)] :> first-child]
-  [item]
-  [:a] (do->
-        (content (:menu_item_text item))
-        (set-attr :href (:menu_item_url item))))
-
-(defsnippet menu-model "templates/html/site-nav-header.html" [:li.dropdown]
-  [{:keys [drop_down_menu_name  menu_item]} model]
-  [:.menu-header]   (content drop_down_menu_name)
-  [:ul.dropdown-menu] (content (map model  menu_item)))
-
-(defsnippet nav-bar  "templates/html/site-nav-header.html" [:nav.container-fluid]
-  [{:keys [title menu-data]}]
-  [:a.brand] (content title)
-  [:ul#nav-bar-dropdown-menu] (content (map #(menu-model % menu-item-model)  menu-data)))
-
-;; HTML DOM
-(deftemplate index-page "templates/html/index.html"
-  [{:keys [site-name pages menu-data] :as settings}]
-  [:div#navbar] (content (nav-bar {:title site-name :menu-data menu-data})))
-
-;; View
-(defn render-str [t] (apply str t))
-
-(defn render-dom
-  [{:keys [pages menu] :as args}]
-  (index-page {:site-name "Clojure Lunch and Learn" :pages nil :menu-data menu}))
-
-;; Controller/Router
-(defroutes app-routes
-  (GET "/" [] (render-dom {:pages (:pages config) :menu (:drop_down_menu (parse-stream (clojure.java.io/reader "resources/menu.json") true)) }))
-  (c-route/resources "/design/" {:root "templates/html"})
-  (c-route/resources "/design/css/" {:root "public/css"})
-  (c-route/resources "/css/" {:root "public/css"})
-  (c-route/resources "/js/" {:root "public/js"})
-  (c-route/not-found "404 Page not found."))
-
-;; Ring Application
-(def app (handler/site app-routes))
-
-;; Jetty Server
-(defn start-app [port]
-  (ring/run-jetty app {:port port :join? false}))
-
-;; Driver entry point
-(defn -main []
-  (let [port (Integer/parseInt (or (System/getenv "PORT") "6088"))]
-    (start-app port)))
+(def app (handler/site all-routes))
+(def request-handler (get-handler app))
