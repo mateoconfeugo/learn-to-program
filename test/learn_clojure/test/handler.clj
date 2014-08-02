@@ -5,18 +5,21 @@
             [expectations :refer [expect]]
             [plumbing.core :refer :all]
             [plumbing.graph :as graph]
-            [learn-clojure.handler :refer :all]))
+            [learn-clojure.handler :refer :all]
+            [clojure.pprint :refer [pprint]]))
 
 ;; SETUP
 (def test-data-graph
   {:app-uri (fnk []  "http://localhost:3000")
    :menu-data (fnk  [](:drop_down_menu (parse-stream (clojure.java.io/reader "resources/menu.json") true)))
    :index-html (fnk [menu-data] (render-dom {:pages (:pages config) :menu menu-data }))
-   :nav-html (fnk [menu-data] (nav-bar {:title "ham" :menu-data menu-data}) )})
+   :nav-dom (fnk [menu-data] (nav-bar {:title "ham" :menu-data menu-data}) )})j
 
 (def test-fixture-fn (graph/eager-compile test-data-graph))
 
-(:nav-html (test-fixture-fn nil))
+(pprint (:menu-data (test-fixture-fn nil)))
+(pprint (:nav-dom (test-fixture-fn nil)))
+(pprint (:index-html (test-fixture-fn nil)))
 
 (comment
 
@@ -33,6 +36,9 @@
   (one-time-teardown))
 
 (use-fixtures :once once-fixture test-fixture-fn)
+
+(:index-html (test-fixture-fn {})
+
 
 (deftest  site-renders-test
   (let [tf (test-fixture-fn {})]

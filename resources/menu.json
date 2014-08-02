@@ -2,13 +2,13 @@
     "drop_down_menu":[
                       {"drop_down_menu_name":"Classes",
                               "menu_item":[
-                                           {"menu_item_url":"/lectures","menu_item_text":"List"},
-                                           {"menu_item_url":"/gists","menu_item_text":"Gists"},
-                                           {"menu_item_url":"/projects","menu_item_text":"Projects"}]},
+                                           {"menu_item_url":"/lectures", "menu_item_text":"List"},
+                                           {"menu_item_url":"/gists", "menu_item_text":"Gists"},
+                                           {"menu_item_url":"/projects", "menu_item_text":"Projects"}]},
                       {"drop_down_menu_name":"Resources",
                               "menu_item":[
-                                           {"menu_item_url":"/resources/cheatsheat","menu_item_text":"CheatSheat"},
-                                           {"menu_item_url":"http://clojars.org","menu_item_text":"Clojars"},
+                                           {"menu_item_url":"/resources/cheatsheat", "menu_item_text":"CheatSheat"},
+                                           {"menu_item_url":"http://clojars.org", "menu_item_text":"Clojars"},
                                            {"menu_item_url":"http://tryclj.com", "menu_item_text":"Try Clojure"}]}
 
                       ]

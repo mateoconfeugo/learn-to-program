@@ -1,5 +1,5 @@
 (ns class02.lecture)
-
+(comment 
 ;; We use the term form to refer to structurally valid code.
 9
 "As a string I'm a valid form"
@@ -84,32 +84,33 @@
 "The artistic temperament is a disease that afflicts amateurs."
 
 ;; Maps and keywords
-:nobu
 (keyword "la-salsa")
-(:nobu {:nobu 1 :sandwich-shop 2})
-(get {:nobu 1 :sandwich-shop 2} :nobu)
 
-(:default {:nobu 1 :sandwich-shop 2} 3)
+(get {:nobu 1 :sandwich-shop 2} :nobu)
+({:nobu 1 :sandwich-shop 2 :ham 3 } :ham )
+
+(:ham {:nobu 1 :sandwich-shop 2 } (+ 1 1))
 (hash-map :nobu 1 :sandwich-shop 2)
 
 ;; Also sorted maps ... later
 
 ;; Vectors
 (def days-off ["new years" "presidents day" "memorial day"])
-(get days-off 0)
+(get days-off 1)
 (first days-off)
 (rest days-off)
 
 ;; Lists
 '("merchant" "general-public" "big-box")
+'(1 2 3 4)
 (list 1 2 3 4)
 (conj '("merchant" "general-public" "big-box") "predatory")
-
 ;; Sets
 
-(def suites #{:hearts :diamonds :spades :clubs})
+
+(def suits #{:hearts :diamonds :spades :clubs})
 (def values #{:ace :king :queen :jack 10 9 8 7 6 5 4 3 2 1})
-(take (count suites) suites)
+(take 2 suits)
 
 ;; Symbols and Names
 
@@ -126,6 +127,8 @@ Functions can return symbols and take them as arguments
 ;; Quoting - A symbol returns the "object" it refers to
 failed-biznuses
 'failed-biznuses
+
+(failed-biznuses 0)
 
 ;; Functions
 (comment
@@ -195,10 +198,10 @@ You can retain access to the original map argument by using the :as keyword. In 
   [{:keys [lat lng] :as biz-location}]
   (println (str "Biz lat: " lat))
   (println (str "Biz lng: " lng))
-  (redirect-to biz-location))
+  (redirect-to biz-location)
+  (println biz-location))
 
-(navigate-to-biz-location {:lat 28.22 :lng 81.33})
-
+(navigate-to-biz-location {:lat 28.22 :lng 81.33 :azimuth 200})
 (comment
   In general, you can think of destructuring as instructing Clojure how to associate symbols with values in a list, map, set, or vector.
   )
@@ -226,28 +229,34 @@ Your function body can contain any forms. Clojure automatically returns the last
 ;; ** Anonymous Functions
 ;; This looks a lot like defn, doesn't it?
 (fn [param-list] (+ 1 1))
-(def ham (fn [param-list] (+ 1 1)))
+(def ham (fn [] (+ 1 1)))
 
 ;; Example
 (def biz-ratings (map (fn [biz] {(keyword biz) (rand)}) ["walmart" "target" "sears"]))
+(def biz-ratings (map #({(keyword %) (rand)}) ["walmart" "target" "sears"]))
+
+(def break-down (map rate-them biznuzes))
+
+(defn rate-them [biz] {(keyword biz) (rand)})
+(def biznuzes ["walmart" "target" "sears"])
+
 
 (def mult-by-3 (fn [x] (* x 3)))
 (mult-by-3 2)
 
 
-(+  1 1 1 1)
+(+  1 1 1 1 3 3)
 ;; Another example
 ((fn [x] (* x 3)) 82)
+
 #(* % 3)
 (#(* % 3) 8)
 
 ;; Another example
-(def biz-ratings (map #({(keyword %) (rand)}) ["walmart" "target" "sears"]))
+
 
 ;; Break it down
-(defn rate-them [biz] {(keyword biz) (rand)})
-(def biznuzes ["walmart" "target" "sears"])
-(def break-down (map rate-them biznuzes))
+
 ;; tangent
 (first (vals (first (filter :sears break-down)))) ; yuck
 ;; Same but not quite so yucky
@@ -326,7 +335,7 @@ Your function body can contain any forms. Clojure automatically returns the last
 ;; sum with reduce
 (reduce + [1 2 3 4 5])
 
-(reduce + 10 [1 2 3 4] )
+(reduce + 10 [1 2 3 4 6 7] )
 
 (defn my-fn
   [result {:keys [name style]}]
@@ -392,7 +401,8 @@ Your function body can contain any forms. Clojure automatically returns the last
 (defn masters-thesis
   [depts amount limit]
   (let [victim (which-department depts)]
-    { :name (:name victim) :personal (cut-by victim amount limit)}))
+    { :name (:name victim) :personal (cut victim amount limit)}))
 
 ;; go forth intrepid MBA
 (masters-thesis us-biz-depts 2 2)
+)
