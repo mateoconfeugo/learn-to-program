@@ -8,7 +8,9 @@
 (remote-ns 'learn-clojure.controller.api :as "api")
 
 (defroutes app-routes
+;;    (resources "/app.js" {:root "../war/javascripts/main.js"})
   (resources "/design/" {:root "templates/html"})
+  (resources "/literate/" {:root "src_docs"})
   (resources "/design/css/" {:root "public/css"})
   (resources "/css/" {:root "public/css"})
   (resources "/js/" {:root "public/js"})
