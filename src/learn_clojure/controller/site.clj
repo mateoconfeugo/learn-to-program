@@ -2,10 +2,12 @@
   (:require [compojure.core :refer [defroutes GET]]
             [cheshire.core :refer [parse-stream]]
             [learn-clojure.config :refer [config]]
-            [learn-clojure.view.host-dom :refer [render-dom]]))
+            [learn-clojure.view.host-dom :refer [render-dom]]
+            [learn-clojure.view.editor :refer [editor]]))
 
 (def site-data {:pages (:pages config)
                 :menu (parse-stream (clojure.java.io/reader "resources/menu.json") true)})
 
 (defroutes site-routes
-  (GET "/" [] (render-dom site-data)))
+  (GET "/" [] (render-dom site-data))
+  (GET "/edit" [] (editor {})))

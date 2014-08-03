@@ -11,7 +11,10 @@
                  [compojure "1.1.5"] ; Web routing https://github.com/weavejester/compojure
                  [com.taoensso/timbre "2.2.0"] ; Logging https://github.com/ptaoussanis/timbre
                  [org.clojure/clojurescript "0.0-2280"] ;; clojure lisp on web browser
+                 [org.clojure/core.async "0.1.303.0-886421-alpha"]
+                 [org.clojure/core.match "0.2.1"]
                  [enlive "1.1.1"] ; DOM manipulating
+                 [jayq "2.5.0"] ; jquery
                  [me.raynes/fs "1.4.0"]  ; File manipulation tools
                  [org.clojure/clojure "1.6.0"]  ; Lisp on the JVM
                  [prismatic/plumbing "0.3.3"] ;; function graphs
