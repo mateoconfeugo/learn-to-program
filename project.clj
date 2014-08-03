@@ -10,6 +10,7 @@
   :dependencies [[cheshire "5.3.1"] ; json
                  [compojure "1.1.5"] ; Web routing https://github.com/weavejester/compojure
                  [com.taoensso/timbre "2.2.0"] ; Logging https://github.com/ptaoussanis/timbre
+                 [org.clojure/clojurescript "0.0-2280"] ;; clojure lisp on web browser
                  [enlive "1.1.1"] ; DOM manipulating
                  [me.raynes/fs "1.4.0"]  ; File manipulation tools
                  [org.clojure/clojure "1.6.0"]  ; Lisp on the JVM
@@ -27,7 +28,20 @@
             [s3-wagon-private "1.1.2"] ;; uses AWS s3 bucket as a private repo for jars
             [lein-expectations "0.0.7"] ;; run expections via lein
             [lein-marginalia "0.7.1"]
+            [lein-cljsbuild "1.0.3"] ;;  make ClojureScript development easy
+            [com.keminglabs/cljx "0.4.0"] ;; s-expression preprocessor
             [lein-autoexpect "0.2.5"]] ;; run continuous expections tests
+  :cljx {:builds [{:source-paths ["src/cljx"]
+                   :output-path "target/classes"
+                   :rules :clj}
+                  {:source-paths ["src/cljx"]
+                   :output-path "target/classes"
+                   :rules :cljs}]}
+  :cljsbuild { :builds [{:source-paths ["src-cljs"]
+                         :compiler {
+                                    :output-to "resources/public/js/app.js"  ; default: target/cljsbuild-main.js
+                                    :optimizations :whitespace
+                                    :pretty-print true}}]}
   :repositories [["private" {:url "s3p://marketwithgusto.repo/releases/"
                              :username :env
                              :passphrase :env}]]
