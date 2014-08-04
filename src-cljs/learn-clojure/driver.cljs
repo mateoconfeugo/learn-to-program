@@ -8,4 +8,5 @@
       (js/initialize_legacy_editor)
       (.log js/console "client app starting")))
 
-(ready (main))
+;;(ready (main))
+(main)

@@ -15,10 +15,15 @@
                  [org.clojure/core.match "0.2.1"]
                  [de.ubercode.clostache/clostache "1.4.0"] ;; text templating
                  [com.ashafa/clutch "0.4.0-RC1"] ; CouchDB client https://github.com/clojure-clutch/clutch
+
                  [clojurewerkz/urly "1.0.0"]
                  [crypto-random "1.1.0"]
                  [enlive "1.1.1"] ; DOM manipulating
                  [jayq "2.5.0"] ; jquery
+                 [korma "0.3.0-RC5"] ; ORM
+                 [org.clojure/java.jdbc "0.3.0-alpha5"]
+                 [mysql/mysql-connector-java "5.1.27"]
+                 [metis "0.3.3"] ; Form validation
                  [me.raynes/fs "1.4.0"]  ; File manipulation tools
                  [org.clojure/clojure "1.6.0"]  ; Lisp on the JVM
                  [prismatic/plumbing "0.3.3"] ;; function graphs

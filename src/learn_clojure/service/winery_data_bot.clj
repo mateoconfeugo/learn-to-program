@@ -1,4 +1,4 @@
-(ns learn-clojure.winery-data-bot
+(ns learn-clojure.service.winery-data-bot
   (:require [clojure.core.async  :refer [put! >! chan go <!! alts!]]
             [clojure.pprint :refer [pprint]]
             [clojure.edn]
