@@ -1,71 +1,126 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <title>learn-clojure by mateoconfeugo</title>
 
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
-    <title>learn-clojure by mateoconfeugo</title>
   </head>
-
   <body>
-    <header>
-      <div class="inner">
-        <h1>learn-clojure</h1>
-        <h2>Web application for the learning clojure class</h2>
-        <a href="https://github.com/mateoconfeugo/learn-clojure" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">learn-clojure</h1>
+        <p class="header">Web application for the learning clojure class</p>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h1>
-<a name="learn-clojure" class="anchor" href="#learn-clojure"><span class="octicon octicon-link"></span></a>learn-clojure</h1>
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/mateoconfeugo/learn-clojure/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/mateoconfeugo/learn-clojure/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/mateoconfeugo/learn-clojure">View On GitHub</a></li>
+        </ul>
 
-<p>A ring Compojure based web site devoted to teaching and promoting Clojure and Clojurescript.  The idea here is to provide
-the information so that aspiring Clojure programmers can use the structure of the site as well as the resources to quickly get
-their application off the ground.  A further goal is to use Clojurescript and explore the new paradigm of using Clojure 
-and Clojurescript together to eliminate the extra complexity that ajax, json and rest sometimes add to projects</p>
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/mateoconfeugo">mateoconfeugo</a></p>
 
-<h2>
+
+      </header>
+      <section>
+        <h1>
+<a name="learning-to-program" class="anchor" href="#learning-to-program"><span class="octicon octicon-link"></span></a>learning-to-program</h1>
+
+<p><a href="https://codeship.io/projects/32332"> <img src="https://codeship.io/projects/56fd2f90-0dd3-0132-184d-0ac0b7fe3cd9/status" alt="Codeship Status for mateoconfeugo/learn-clojure"></a></p>
+
+<p>A Clojure web application designed to help you:</p>
+
+<ul>
+<li>Learn clojure </li>
+<li>Become familar with the common libraries with an emphasis on web development</li>
+<li>Learn the development deployment and maintenance tools, procedures available to make your life simplier </li>
+<li>Be able to come back to a project weeks,months,years later and have something you can run use and understand</li>
+</ul><p>The idea is that making easy to contribute to the project, 
+test the project and deploy the project right at the beginning will help you to complete the project.
+Getting a project done is about keeping the momentuem going.</p>
+
+<p>Coupling awesome technology like clojure/script together with some devops best practices can help you get the project completed and allows it to be improved upon in a maintainable fashion</p>
+
+<p>Every project should have out of the box</p>
+
+<ul>
+<li>Working Demo in the cloud</li>
+<li>Documentation of the code in the literate style</li>
+<li>Pallet deployment</li>
+<li>Publish artifact to repo</li>
+<li>Test framework</li>
+<li>Source Control Strategy</li>
+</ul><h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<p>lein ring server-headless</p>
+<p>Try to use lein a central point for doing all you development/operations/maintence tasks for example:</p>
+
+<p>Devops:</p>
+
+<h3>
+<a name="launch-the-application-in-a-docker-container" class="anchor" href="#launch-the-application-in-a-docker-container"><span class="octicon octicon-link"></span></a>Launch the application in a docker container</h3>
+
+<p>lein pallet up -P docker</p>
+
+<h3>
+<a name="push-the-application-jaruberjar-to-a-private-s3-bucket" class="anchor" href="#push-the-application-jaruberjar-to-a-private-s3-bucket"><span class="octicon octicon-link"></span></a>Push the application jar/uberjar to a private s3 bucket</h3>
+
+<p>lein deploy private</p>
+
+<h3>
+<a name="launch-the-application-to-prdstgqa-awsrsdocker" class="anchor" href="#launch-the-application-to-prdstgqa-awsrsdocker"><span class="octicon octicon-link"></span></a>Launch the application to prd/stg/qa aws/rs/docker</h3>
+
+<p>lein pallet up prd/stg/qa -P aws/rs/docker</p>
+
+<h2>
+<a name="development" class="anchor" href="#development"><span class="octicon octicon-link"></span></a>Development</h2>
+
+<h3>
+<a name="continuous-run-the-test-suite" class="anchor" href="#continuous-run-the-test-suite"><span class="octicon octicon-link"></span></a>Continuous run the test suite</h3>
+
+<p>lein autoexpect</p>
+
+<h3>
+<a name="run-the-clojurescript-compiler-in-develoment" class="anchor" href="#run-the-clojurescript-compiler-in-develoment"><span class="octicon octicon-link"></span></a>Run the clojurescript compiler in develoment</h3>
+
+<p>lein cljsbuild auto</p>
+
+<h3>
+<a name="run-the-test-suite" class="anchor" href="#run-the-test-suite"><span class="octicon octicon-link"></span></a>Run the test suite</h3>
+
+<p>lein test</p>
+
+<h3>
+<a name="create-the-documentation" class="anchor" href="#create-the-documentation"><span class="octicon octicon-link"></span></a>Create the documentation</h3>
+
+<p>lein marg</p>
+
+<h3>
+<a name="using-an-iteractive-environment" class="anchor" href="#using-an-iteractive-environment"><span class="octicon octicon-link"></span></a>Using an iteractive environment</h3>
+
+<p>Being able to write the code in the application as it is running.
+Creating the code while creating the test.  Then copying the test into a test suite file and evaluating that.
+Further since the lein autoexpect plugin is continuous running your test it will pick up the change and run it.</p>
 
 <h2>
 <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
-<p>Copyright © 2013 Matt Burns</p>
+<p>Copyright © 2014 Matt Burns All rights reserved</p>
 
 <p>Distributed under the Eclipse Public License, the same as Clojure.</p>
-        </section>
-
-        <aside id="sidebar">
-          <a href="https://github.com/mateoconfeugo/learn-clojure/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/mateoconfeugo/learn-clojure/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/mateoconfeugo/learn-clojure"></a> is maintained by <a href="https://github.com/mateoconfeugo">mateoconfeugo</a>.</p>
-
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
     </div>
-
-  
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
   </body>
 </html>
