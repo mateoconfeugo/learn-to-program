@@ -1,5 +1,5 @@
-(ns class02.lecture)
-(comment 
+(ns lectures.forms-language-elements)
+(comment
 ;; We use the term form to refer to structurally valid code.
 9
 "As a string I'm a valid form"
