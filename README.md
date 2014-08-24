@@ -3,9 +3,13 @@
 [ ![Codeship Status for mateoconfeugo/learn-clojure](https://codeship.io/projects/56fd2f90-0dd3-0132-184d-0ac0b7fe3cd9/status)](https://codeship.io/projects/32332)
 
 A Clojure web application designed to help you:
-1) learn clojure 
-2) become familar with the common libraries with an emphasis on web development
-3) learn the development deployment and maintenance tools, procedures available to make your life simplier 
+1) Learn clojure 
+2) Become familar with the common libraries with an emphasis on web development
+3) Learn the development deployment and maintenance tools, procedures available to make your life simplier 
+4) Be able to come back to a project weeks,months,years later and have something you can run use and understand
+
+The idea is that making easy to contribute to the project, 
+test the project and deploy the project right at the beginning will help you to complete the project.
 
 ## Usage
 
