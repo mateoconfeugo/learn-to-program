@@ -13,16 +13,35 @@
                  [org.clojure/clojurescript "0.0-2280"] ;; clojure lisp on web browser
                  [org.clojure/core.async "0.1.303.0-886421-alpha"]
                  [org.clojure/core.match "0.2.1"]
+                 [de.ubercode.clostache/clostache "1.4.0"] ;; text templating
+                 [com.ashafa/clutch "0.4.0-RC1"] ; CouchDB client https://github.com/clojure-clutch/clutch
+
+                 [clojurewerkz/urly "1.0.0"]
+                 [crypto-random "1.1.0"]
                  [enlive "1.1.1"] ; DOM manipulating
                  [jayq "2.5.0"] ; jquery
+                 [korma "0.3.0-RC5"] ; ORM
+                 [org.clojure/java.jdbc "0.3.0-alpha5"]
+                 [mysql/mysql-connector-java "5.1.27"]
+                 [metis "0.3.3"] ; Form validation
                  [me.raynes/fs "1.4.0"]  ; File manipulation tools
                  [org.clojure/clojure "1.6.0"]  ; Lisp on the JVM
                  [prismatic/plumbing "0.3.3"] ;; function graphs
                  [amalloy/ring-gzip-middleware "0.1.3" :exclusions [org.clojure/clojure]]
+                 [com.palletops/pallet "0.8.0-RC.9"] ;; dev ops framework
+                 [com.palletops/pallet-jclouds "1.7.3"] ;; cloud provider abstraction layer pallet uses
+                 [com.palletops/pallet-docker "0.1.0"]
+                 [com.palletops/pallet-aws "0.2.3"]
+                 [de.ubercode.clostache/clostache "1.4.0"]
+                 [org.apache.jclouds/jclouds-allblobstore "1.7.2"]
+                 [org.apache.jclouds/jclouds-allcompute "1.7.2"]
+                 [org.apache.jclouds.driver/jclouds-slf4j "1.7.2" :exclusions [org.slf4j/slf4j-api]]
+                 [org.apache.jclouds.driver/jclouds-sshj "1.7.2"] ;; ssh client functionality
                  [ring "1.2.0"] ; Webserver framework
                  [ring/ring-jetty-adapter "1.2.0"]
                  [ring.middleware.logger "0.4.0"]
                  [ring-anti-forgery "0.3.0"] ;
+                 [ch.qos.logback/logback-classic "1.0.9"]
                  [shoreleave "0.3.0"]
                  [shoreleave/shoreleave-remote "0.3.0"]
                  [shoreleave/shoreleave-remote-ring "0.3.0"]] ; web server logging middleware
@@ -50,4 +69,9 @@
                              :passphrase :env}]]
   :profiles  {:dev {:dependencies [[ring-mock "0.1.3"]
                                    [ring/ring-devel "1.1.8"]
-                                   [expectations "1.4.49"]]}})
+                                   [com.palletops/pallet "0.8.0-RC.9" :classifier "tests"]
+                                   [expectations "1.4.49"]]
+                    :plugins [[com.palletops/pallet-lein "0.8.0-alpha.1"]]}
+              :leiningen/reply
+              {:dependencies [[org.slf4j/jcl-over-slf4j "1.7.2"]]
+               :exclusions [commons-logging]}})
