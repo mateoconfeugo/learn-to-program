@@ -1,1 +1,1 @@
-web: lein trampoline run -m learn-to-program.handler
+web: java $JVM_OPTS -cp target/learn-clojure-0.1.0-standalone.jar
