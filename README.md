@@ -10,6 +10,17 @@ A Clojure web application designed to help you:
 
 The idea is that making easy to contribute to the project, 
 test the project and deploy the project right at the beginning will help you to complete the project.
+Getting a project done is about keeping the momentuem going.
+
+Coupling awesome technology like clojure/script together with some devops best practices can help you get the project completed and allows it to be improved upon in a maintainable fashion
+
+Every project should have out of the box
+* Working Demo in the cloud
+* Documentation of the code in the literate style
+* Pallet deployment
+* Publish artifact to repo
+* Test framework
+* Source Control Strategy
 
 ## Usage
 
