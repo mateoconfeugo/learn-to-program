@@ -54,7 +54,7 @@ d
 (def long-calculation (future (apply + (range 1e8))))
 ;= #'user/long-calculation
 
-
+(+ 1 1)
 ;-----
 @long-calculation
 ;= 4999999950000000
@@ -223,7 +223,7 @@ Person sarah = new Person("Sarah", 25, false);
                             (println "trying 4")
                             (conj v 4)))
                 (swap! xs (fn [v]
-                            (Thread/sleep 500)
+                            (Thread/sleep 100)
                             (println "trying 5")
                             (conj  5))))
 ;= nil
@@ -516,8 +516,10 @@ Person sarah = new Person("Sarah", 25, false);
   [v]
   (<= v *max-value*))
 ;= #'user/valid-value?
-(binding [*max-value* 500]
+(binding [*max-value* 100]
   (valid-value? 299))
+
+(valid-value? 240)
 ;= true
 
 
@@ -575,7 +577,7 @@ Person sarah = new Person("Sarah", 25, false);
       (set! *response-code* response-code))
     (when (not= 404 response-code) (-> conn .getInputStream slurp))))
 
-(http-get "http://google.com")
+(def google (http-get "http://google.com"))
 ;= "<!doctype html><html><head>..."
 *response-code*
 ;= nil

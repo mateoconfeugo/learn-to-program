@@ -15,9 +15,10 @@
                  [org.clojure/core.match "0.2.1"]
                  [de.ubercode.clostache/clostache "1.4.0"] ;; text templating
                  [com.ashafa/clutch "0.4.0-RC1"] ; CouchDB client https://github.com/clojure-clutch/clutch
-
+                 [org.clojure/data.json "0.2.5"]
                  [clojurewerkz/urly "1.0.0"]
                  [crypto-random "1.1.0"]
+                 [http.async.client "0.5.2"]
                  [enlive "1.1.1"] ; DOM manipulating
                  [jayq "2.5.0"] ; jquery
                  [korma "0.3.0-RC5"] ; ORM
@@ -49,6 +50,7 @@
             [lein-ancient "0.5.4"]
             [s3-wagon-private "1.1.2"] ;; uses AWS s3 bucket as a private repo for jars
             [lein-expectations "0.0.7"] ;; run expections via lein
+            [com.palletops/uberimage "0.1.5"] ;;  generate a docker image that runs a project's uberjar
             [lein-marginalia "0.7.1"]
             [lein-cljsbuild "1.0.3"] ;;  make ClojureScript development easy
             [com.keminglabs/cljx "0.4.0"] ;; s-expression preprocessor
