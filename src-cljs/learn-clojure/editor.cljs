@@ -6,7 +6,8 @@
                    [shoreleave.remotes.macros :as srm :refer [rpc]])
   (:require [cljs.core.async :refer [alts! chan >! >! put!]]
             [cljs.core.async.impl.ioc-helpers ]
-            [jayq.core :as jq :refer [$ on prevent]]
+            [jayq.core :as jq :refer  [$ text val on prevent remove-class add-class remove empty html children append]
+             ]
             [shoreleave.browser.storage.sessionstorage :refer [storage]]
             [shoreleave.remote]))
 
@@ -17,7 +18,7 @@
 (defn extract-dom
   [event ui]
   "Gather the necessary dom and admin data from a droppable event and ui element node"
-  (let [demo (html ($ ".demo"))
+  (let [demo (jq/html ($ ".demo"))
         dom (nth (js->clj (.-item ui)) 0)
         xpath (js/getXPath dom)]
     {:page-html demo :snippet-html (.-innerHTML dom) :xpath xpath :dom dom
@@ -78,8 +79,8 @@
       (.log js/console (js/getXPath (:target model)))
       ;;      (add-class ($ (:dom model)) "demo")
       ;;      (add-class ($ elm) host-element-class)
-      (add-class ($ elm) "demo")
-      (html ($ elm) (or (:tmp-page-html model) (:page-html model)))))
+      (jq/add-class ($ elm) "demo")
+      (jq/html ($ elm) (or (:tmp-page-html model) (:page-html model)))))
 
 (defn new-async-app
   "Create the event channels and start the loop that feeds the event data to the
@@ -92,8 +93,8 @@
         channels [save-channel drop-channel]
         dispatcher (fn  [ch val]
                      (match [(nth val 0)]
-                            [:save] (save drop-channel  {:page-html (html ($ ".demo")) :user-id (:user-id session) :doc-id (:landing-site-id session)})
-                            [:drop] (update drop-channel (assoc (nth val 1)))
+                            [:save] (save drop-channel  {:page-html (jq/html ($ ".demo")) :user-id (:user-id session) :doc-id (:landing-site-id session)})
+                            [:drop] (update drop-channel  (nth val 1))
                             [:update] (render-workspace ch (nth val 1) ($ ".demo") "")))]
     (go (while true
           (let [[val ch] (alts! channels)]
