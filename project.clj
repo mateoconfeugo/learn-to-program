@@ -15,7 +15,9 @@
                  [org.clojure/core.match "0.2.1"]
                  [de.ubercode.clostache/clostache "1.4.0"] ;; text templating
                  [com.ashafa/clutch "0.4.0-RC1"] ; CouchDB client https://github.com/clojure-clutch/clutch
-
+                 [org.clojars.bsima/stockings "1.1.2.1-SNAPSHOT"]
+                 [overtone/at-at "1.2.0"]
+                 [org.clojars.vshender/clojure-contrib "1.2.0-SNAPSHOT"]
                  [clojurewerkz/urly "1.0.0"]
                  [crypto-random "1.1.0"]
                  [enlive "1.1.1"] ; DOM manipulating

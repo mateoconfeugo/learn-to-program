@@ -1,8 +1,18 @@
 (ns learn-clojure.service.winery-data-bot
+  ^ {:author "Matthew Burns"
+     :doc "Contains the control flow logic for the asynchronous aspects of the program.
+   The control logic of the program is decoupled and isolated by using the core.async
+   go channels.
+   The various logical piecies of the processing system have channels that serve
+   as connection to each piece.
+   A convention of sending a vector container a keyword token message  pair is used
+   when inserting data into the channel system.
+   This pair of information is used by the the dispatcher to route the correct data to
+   correct handling function." }
   (:require [clojure.core.async  :refer [put! >! chan go <!! alts!]]
             [clojure.pprint :refer [pprint]]
             [clojure.edn]
-            [com.ashafa.clutch :as clutch]
+            [com.ashafa.clutch :as clutch :refer [get-database with-db put-document]]
             [net.cgrand.enlive-html :as html]
             [clojure.core.match :refer [match]]
             [clojurewerkz.urly.core :refer [query-of]]))
@@ -31,7 +41,7 @@
 
 (defn wineries-doc-db
   [region]
-  (clutch/get-database (format "wine-%s" region)))
+  (get-database (format "wine-%s" region)))
 
 (defn extract-winery-data
   "Extract the profile as well as the url to the wineries web site "
@@ -44,36 +54,48 @@
      :uri u
      :winery-id winery-id}))
 
-(defn mine
-  "Contains the control flow logic for the asynchronous aspects of the program"
+;;        store-fn  (fn [data]  (pprint data))
+
+;; What are the advantages of using core async go channels?
+;; Why do I need to have access to the channels in the dispatch tables (one of the reasons for the closure) couldn't there be
+;; another channel that serves to route all the channels isn't that what alt! is already doing
+
+(defn wire-up
+  "Control logic of a screen scraper get raw data -> filter/transform data -> store data"
   [{:keys [uri region] :as settings} ]
   (let [doc-db (wineries-doc-db region)
-        ;; CHANNELS
         retreive-channel (chan)
         extract-channel (chan)
-        store-channel (chan)
-        channels [retreive-channel extract-channel store-channel]
-        ;; LAMBDA WIRING
-        retreive-fn (fn [uri]
-                      (let [id  (nth (first (re-seq #"winery=(\d+)" (query-of uri))) 1)
-                            d (fetch-uri uri)
-                            msg  {:dom d :winery-id id}]
-                        (go (>! extract-channel [:extract msg]))))
+        store-channel (chan)]
+    {:channels [retreive-channel extract-channel store-channel]
+     :dispatcher (fn [ch tuple]
+                   (let [[msg-token data] (take 2 tuple)]
+                     ;; notice functions created and called all at once.
+                         (match [msg-token]
+                                [:retreive] ((fn [uri]
+                                               (let [winery-id  (nth (first (re-seq #"winery=(\d+)" (query-of uri))) 1)
+                                                     html (fetch-uri uri)
+                                                     msg  {:dom html :winery-id winery-id}]
+                                                 (go (>! extract-channel [:extract msg])))) data)
 
-        extract-fn (fn [data] (go (>! store-channel [:store (extract-winery-data data)])))
-;;        store-fn  (fn [data]  (clutch/with-db doc-db (clutch/put-document data)))
-        store-fn  (fn [data]  (pprint data))
-        ;; DISTPATCH TABLE
-        dispatcher (fn [ch tuple]
-                     (let [[msg-token data] (take 2 tuple)]
-                       (match [msg-token]
-                              [:retreive] (retreive-fn data)
-                              [:extract] (extract-fn  data)
-                              [:store] (store-fn data))))]
-    (do
-      ;; PUT CHANNEL EVENTS INTO DISPATCHER
-      (go (while true
-            (let [[val ch] (alts! channels)]
-              (dispatcher ch val))))
-      ;; START PUSHING INPUT INTO SYSTEM
-      (map #(go (>! retreive-channel [:retreive %]))  (fetch-winery-list uri)) )))
+                                [:extract] ((fn [data] (go (>! store-channel [:store (extract-winery-data data)]))) data)
+
+                                [:store] ((fn [data] (with-db doc-db (put-document data))) data))))}))
+
+(defn mine
+  "Retreive the desired infromation and save it by:
+   1) starting handling messages flowing out of the channels with the dispatcher
+   2) input data into the system for processing"
+  [{:keys [uri region] :as settings} ]
+  (let [{:keys [dispatcher channels]} (wire-up settings)]
+    (do (go (while true
+              (let [[val ch] (alts! channels)]
+                (dispatcher ch val))))
+        (map #(go (>! retreive-channel [:retreive %])) (fetch-winery-list uri)))))
+
+;; It'd be cool to show some of the higher level things we can do with channels
+
+(comment
+  (fetch-winery-list base-uri)
+  (mine {:uri base-uri :region "paso" } )
+)
