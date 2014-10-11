@@ -8,7 +8,7 @@
             [clojure.pprint]
             [clojure.test :refer [is]]
             [clojure.java.io :refer [writer]]
-            [learn-clojure.service.winery-data-bot :refer [mine]]
+            [learn-clojure.service.winery-data-bot :refer [gather]]
             [com.ashafa.clutch :as clutch :refer [couch create! document-exists? get-document put-document with-db put-attachment database-info]]
             [taoensso.timbre :refer [info]]
             [learn-clojure.model.orm :refer [mgmt-dbh user]]
@@ -310,7 +310,7 @@
   "gets most of the relevant information about the various wines in paso robles"
   []
   (do
-    (mine {:uri base-uri :region "paso-robles"})
+    (gather {:uri base-uri :region "paso-robles"})
     {:results []
      :message "blah"}))
 
