@@ -54,12 +54,19 @@
      :uri u
      :winery-id winery-id}))
 
+(defn scrape-winery [uri output]
+  (let [winery-id  (nth (first (re-seq #"winery=(\d+)" (query-of uri))) 1)
+        html (fetch-uri uri)
+        msg  {:dom html :winery-id winery-id}]
+    (go (>! output [:extract msg]))))
+
 ;; What are the advantages of using core async go channels?
 ;; Why do I need to have access to the channels in the dispatch tables (one of the reasons for the closure) couldn't there be
 ;; another channel that serves to route all the channels isn't that what alt! is already doing
 
 ;; Maybe have control logic be a multimethod that determines which control logic to implement with a system
 ;; The multimethods could all return a record that Implements the ChannelControlLogic Protocol
+
 (defn control-logic
   "Control logic of a screen scraper get raw data -> filter/transform data -> store data"
   [{:keys [uri region] :as settings} ]
@@ -71,17 +78,10 @@
     {:dispatcher (fn [ch tuple]
                    (let [[msg-token data] (take 2 tuple)]
                      (match [msg-token]
-                            [:retreive] ((fn [uri]
-                                           (let [winery-id  (nth (first (re-seq #"winery=(\d+)" (query-of uri))) 1)
-                                                 html (fetch-uri uri)
-                                                 msg  {:dom html :winery-id winery-id}]
-                                             (go (>! extract-channel [:extract msg])))) data)
-
+                            [:retreive] (scrape-winery data extract-channel)
                             [:extract] ((fn [data] (go (>! store-channel [:store (extract-winery-data data)]))) data)
-
                             [:store] ((fn [data] (with-db doc-db (put-document data))) data))))
      :channels {:iput retreive-channel :process extract-channel  :store store-channel}}))
-
 
  ;; Run system could be a macro that will take anything iplementing the ChannelControlLogic protocol
 (defn gather

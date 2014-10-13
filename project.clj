@@ -5,6 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :min-lein-version "2.0.0"
   :uberjar-name "learn-clojure-0.1.0-standalone.jar"
+  :jvm-opts ["-Xmx2g" "-server" "-XX:MaxPermSize=1g" "-XX:+CMSClassUnloadingEnabled"]
   :main learn-clojure.server
   :ring {:handler learn-clojure.handler/request-handler :auto-reload? true :auto-refresh true}
   :dependencies [[cheshire "5.3.1"] ; json
@@ -15,10 +16,10 @@
                  [org.clojure/core.match "0.2.1"]
                  [de.ubercode.clostache/clostache "1.4.0"] ;; text templating
                  [com.ashafa/clutch "0.4.0-RC1"] ; CouchDB client https://github.com/clojure-clutch/clutch
-
                  [clojurewerkz/urly "1.0.0"]
                  [crypto-random "1.1.0"]
                  [enlive "1.1.1"] ; DOM manipulating
+                 [http-kit "2.1.16"]
                  [jayq "2.5.0"] ; jquery
                  [korma "0.3.0-RC5"] ; ORM
                  [org.clojure/java.jdbc "0.3.0-alpha5"]
@@ -37,6 +38,7 @@
                  [org.apache.jclouds/jclouds-allcompute "1.7.2"]
                  [org.apache.jclouds.driver/jclouds-slf4j "1.7.2" :exclusions [org.slf4j/slf4j-api]]
                  [org.apache.jclouds.driver/jclouds-sshj "1.7.2"] ;; ssh client functionality
+                 [riemann-clojure-client "0.2.11"] ;; Aggregated event monitoring client
                  [ring "1.2.0"] ; Webserver framework
                  [ring/ring-jetty-adapter "1.2.0"]
                  [ring.middleware.logger "0.4.0"]
