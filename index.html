@@ -6,8 +6,7 @@
     <title>learn-clojure by mateoconfeugo</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
+    <link rel="stylesheet" href="stylesheets/github-light.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -16,22 +15,21 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1 class="header">learn-clojure</h1>
-        <p class="header">Web application for the learning clojure class</p>
+        <h1>learn-clojure</h1>
+        <p>Web application for the learning clojure class</p>
+
+        <p class="view"><a href="https://github.com/mateoconfeugo/learn-clojure">View the Project on GitHub <small>mateoconfeugo/learn-clojure</small></a></p>
+
 
         <ul>
-          <li class="download"><a class="buttons" href="https://github.com/mateoconfeugo/learn-clojure/zipball/master">Download ZIP</a></li>
-          <li class="download"><a class="buttons" href="https://github.com/mateoconfeugo/learn-clojure/tarball/master">Download TAR</a></li>
-          <li><a class="buttons github" href="https://github.com/mateoconfeugo/learn-clojure">View On GitHub</a></li>
+          <li><a href="https://github.com/mateoconfeugo/learn-clojure/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/mateoconfeugo/learn-clojure/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/mateoconfeugo/learn-clojure">View On <strong>GitHub</strong></a></li>
         </ul>
-
-        <p class="header">This project is maintained by <a class="header name" href="https://github.com/mateoconfeugo">mateoconfeugo</a></p>
-
-
       </header>
       <section>
         <h1>
-<a name="learn-clojure" class="anchor" href="#learn-clojure"><span class="octicon octicon-link"></span></a>learn-clojure</h1>
+<a id="learn-clojure" class="anchor" href="#learn-clojure" aria-hidden="true"><span class="octicon octicon-link"></span></a>learn-clojure</h1>
 
 <p><a href="https://codeship.io/projects/32332"> <img src="https://codeship.io/projects/56fd2f90-0dd3-0132-184d-0ac0b7fe3cd9/status" alt="Codeship Status for mateoconfeugo/learn-clojure"></a></p>
 
@@ -42,7 +40,9 @@
 <li>Become familar with the common libraries with an emphasis on web development</li>
 <li>Learn the development deployment and maintenance tools, procedures available to make your life simplier </li>
 <li>Be able to come back to a project weeks,months,years later and have something you can run use and understand</li>
-</ul><p>The idea is that making easy to contribute to the project, 
+</ul>
+
+<p>The idea is that making easy to contribute to the project, 
 test the project and deploy the project right at the beginning will help you to complete the project.
 Getting a project done is about keeping the momentuem going.</p>
 
@@ -57,70 +57,83 @@ Getting a project done is about keeping the momentuem going.</p>
 <li>Publish artifact to repo</li>
 <li>Test framework</li>
 <li>Source Control Strategy</li>
-</ul><h2>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+</ul>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
 
 <p>Try to use lein a central point for doing all you development/operations/maintence tasks for example:</p>
 
 <p>Devops:</p>
 
 <h3>
-<a name="launch-the-application-in-a-docker-container" class="anchor" href="#launch-the-application-in-a-docker-container"><span class="octicon octicon-link"></span></a>Launch the application in a docker container</h3>
+<a id="launch-the-application-in-a-docker-container" class="anchor" href="#launch-the-application-in-a-docker-container" aria-hidden="true"><span class="octicon octicon-link"></span></a>Launch the application in a docker container</h3>
 
 <p>lein pallet up -P docker</p>
 
 <h3>
-<a name="push-the-application-jaruberjar-to-a-private-s3-bucket" class="anchor" href="#push-the-application-jaruberjar-to-a-private-s3-bucket"><span class="octicon octicon-link"></span></a>Push the application jar/uberjar to a private s3 bucket</h3>
+<a id="push-the-application-jaruberjar-to-a-private-s3-bucket" class="anchor" href="#push-the-application-jaruberjar-to-a-private-s3-bucket" aria-hidden="true"><span class="octicon octicon-link"></span></a>Push the application jar/uberjar to a private s3 bucket</h3>
 
 <p>lein deploy private</p>
 
 <h3>
-<a name="launch-the-application-to-prdstgqa-awsrsdocker" class="anchor" href="#launch-the-application-to-prdstgqa-awsrsdocker"><span class="octicon octicon-link"></span></a>Launch the application to prd/stg/qa aws/rs/docker</h3>
+<a id="launch-the-application-to-prdstgqa-awsrsdocker" class="anchor" href="#launch-the-application-to-prdstgqa-awsrsdocker" aria-hidden="true"><span class="octicon octicon-link"></span></a>Launch the application to prd/stg/qa aws/rs/docker</h3>
 
 <p>lein pallet up prd/stg/qa -P aws/rs/docker</p>
 
 <h2>
-<a name="development" class="anchor" href="#development"><span class="octicon octicon-link"></span></a>Development</h2>
+<a id="development" class="anchor" href="#development" aria-hidden="true"><span class="octicon octicon-link"></span></a>Development</h2>
 
 <h3>
-<a name="continuous-run-the-test-suite" class="anchor" href="#continuous-run-the-test-suite"><span class="octicon octicon-link"></span></a>Continuous run the test suite</h3>
+<a id="continuous-run-the-test-suite" class="anchor" href="#continuous-run-the-test-suite" aria-hidden="true"><span class="octicon octicon-link"></span></a>Continuous run the test suite</h3>
 
 <p>lein autoexpect</p>
 
 <h3>
-<a name="run-the-clojurescript-compiler-in-develoment" class="anchor" href="#run-the-clojurescript-compiler-in-develoment"><span class="octicon octicon-link"></span></a>Run the clojurescript compiler in develoment</h3>
+<a id="run-the-clojurescript-compiler-in-develoment" class="anchor" href="#run-the-clojurescript-compiler-in-develoment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Run the clojurescript compiler in develoment</h3>
 
 <p>lein cljsbuild auto</p>
 
 <h3>
-<a name="run-the-test-suite" class="anchor" href="#run-the-test-suite"><span class="octicon octicon-link"></span></a>Run the test suite</h3>
+<a id="run-the-test-suite" class="anchor" href="#run-the-test-suite" aria-hidden="true"><span class="octicon octicon-link"></span></a>Run the test suite</h3>
 
 <p>lein test</p>
 
 <h3>
-<a name="create-the-documentation" class="anchor" href="#create-the-documentation"><span class="octicon octicon-link"></span></a>Create the documentation</h3>
+<a id="create-the-documentation" class="anchor" href="#create-the-documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create the documentation</h3>
 
 <p>lein marg</p>
 
 <h3>
-<a name="using-an-iteractive-environment" class="anchor" href="#using-an-iteractive-environment"><span class="octicon octicon-link"></span></a>Using an iteractive environment</h3>
+<a id="using-an-iteractive-environment" class="anchor" href="#using-an-iteractive-environment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using an iteractive environment</h3>
 
 <p>Being able to write the code in the application as it is running.
 Creating the code while creating the test.  Then copying the test into a test suite file and evaluating that.
 Further since the lein autoexpect plugin is continuous running your test it will pick up the change and run it.</p>
 
 <h2>
-<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>Copyright © 2014 Matt Burns All rights reserved</p>
 
 <p>Distributed under the Eclipse Public License, the same as Clojure.</p>
       </section>
       <footer>
-        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+        <p>This project is maintained by <a href="https://github.com/mateoconfeugo">mateoconfeugo</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-		
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-67852560-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
   </body>
 </html>
